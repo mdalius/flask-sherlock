@@ -75,4 +75,11 @@
     "rating": 8.0,
     "directors": ["Harold Ramis"],
     "stars": ["Bill Murray", "Andie MacDowell", "Chris Elliott", "Punxsutawney Phil"]
+}, {
+    "title": "Oppenheimer",
+    "genre": ["biography", "drama", "history"],
+    "year": 2023,
+    "rating": 8.4,
+    "directors": ["Christopher Nolan"],
+    "stars": ["Cillian Murphy", "Emily Blunt", "Matt Damon"]
 }]

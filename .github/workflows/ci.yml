@@ -40,7 +40,7 @@ jobs:
         IMAGE_ARTIFACT: ${{ secrets.DOCKER_HUB_USERNAME }}/sherlock:latest
     environment: production
     steps:
-     - uses: actions/checkout@v2
+     - uses: actions/checkout@v4
      - name: Login to DockerHub
        run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
      - name: Build docker image

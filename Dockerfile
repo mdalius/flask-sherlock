@@ -13,7 +13,7 @@ WORKDIR /app
 COPY app/ /app
 
 # Upgrade pip & install python packages
-RUN pip install --upgrade pip --requirement /app/requirements.txt
+RUN pip install --upgrade --requirement /app/requirements.txt
 
 # Indicate which port to expose
 EXPOSE $PORT

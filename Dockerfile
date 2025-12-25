@@ -1,4 +1,4 @@
-FROM python:3.9.5-alpine
+FROM python:3.9.5-slim
 
 # Setup environment variables
 ENV PORT=8080 \
@@ -20,4 +20,4 @@ RUN pip install --upgrade pip && \
 EXPOSE $PORT
 
 # Start app server
-CMD flask run --host=$HOST --port=$PORT
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8080"]

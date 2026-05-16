@@ -1,5 +1,6 @@
 import os
 import json
+import logging
 from json.decoder import JSONDecodeError
 
 from flask import Flask
@@ -13,6 +14,7 @@ from rengine import Sherlock
 app = Flask(__name__)
 app.json.ensure_ascii = False
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
+logger = logging.getLogger(__name__)
 
 def read_data(source):
     """
@@ -25,12 +27,15 @@ def read_data(source):
         with open(source) as db:
             content = db.read()
         data = json.loads(content)
-    except FileNotFoundError as e:
-        errors = [f"Reading {source}, {str(e)}"]
-    except JSONDecodeError as e:
-        errors = [f"Reading {source}, {str(e)}"]
-    except Exception as e:
-        errors = [f"Reading {source}, {str(e)}"]
+    except FileNotFoundError:
+        logger.exception("Failed to read data from %s", source)
+        errors = ["Unable to load movie data."]
+    except JSONDecodeError:
+        logger.exception("Failed to parse JSON data from %s", source)
+        errors = ["Unable to load movie data."]
+    except Exception:
+        logger.exception("Unexpected error while reading data from %s", source)
+        errors = ["Unable to load movie data."]
 
     return data, errors
 

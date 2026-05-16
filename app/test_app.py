@@ -25,3 +25,16 @@ def test_api(client):
     assert response.status_code == 200
     assert response.is_json
     assert len(response.get_json()) >= 5
+
+
+def test_api_returns_500_when_data_unavailable(client, monkeypatch):
+    monkeypatch.setattr("run.read_data", lambda source: ([], ["Unable to load movie data."]))
+
+    response = client.get("/api/v1/movies/recommend")
+
+    assert response.status_code == 500
+    assert response.is_json
+    assert response.get_json() == {
+        "errors": ["Unable to load movie data."],
+        "status_code": 500,
+    }

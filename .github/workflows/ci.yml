@@ -9,11 +9,11 @@ jobs:
       CODE_COVERAGE_THRESHOLD: 90
     strategy:
       matrix:
-        python-version: [3.9, "3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
-     - uses: actions/checkout@v4
+     - uses: actions/checkout@v7
      - name: Set up Python ${{ matrix.python-version }}
-       uses: actions/setup-python@v4
+       uses: actions/setup-python@v6
        with:
         python-version: ${{ matrix.python-version }}
      - name: Update pip
@@ -44,7 +44,7 @@ jobs:
         IMAGE_ARTIFACT: ${{ secrets.DOCKER_HUB_USERNAME }}/sherlock:latest
     environment: production
     steps:
-     - uses: actions/checkout@v4
+     - uses: actions/checkout@v7
      - name: Login to DockerHub
        run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
      - name: Build docker image
